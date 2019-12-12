@@ -36,7 +36,8 @@ router.get('/list', async (req, res, next) => {
 
     res.status(200).json({
       succeed: true,
-      list: articalList
+      count: articalList.count,
+      list: articalList.rows
     });
   } catch (err) {
     next(err);
