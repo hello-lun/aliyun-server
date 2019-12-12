@@ -1,5 +1,5 @@
 const express = require('express');
-const Models = require('../../models');
+const Models = require('../../db/models');
 
 const router = express.Router();
 
@@ -29,7 +29,7 @@ router.get('/add-member', async(req, res) => {
 
 router.get('/get-member', async(req, res) => {
   let {name} = req.query;
-  let member = await Models.Members.findAll({
+  let member = await Models.Members.findOne({
     where: {name}
   });
 
@@ -50,7 +50,7 @@ router.get('/login', async(req, res) => {
     })
   }
 
-  let member = await Models.Members.findAll({
+  let member = await Models.Members.findOne({
     where: {name}
   });
 
@@ -87,7 +87,7 @@ router.get('/registered', async(req, res) => {
     })
   }
   
-  let member = await Models.Members.findAll({
+  let member = await Models.Members.findOne({
     where: {name}
   });
 
@@ -98,7 +98,7 @@ router.get('/registered', async(req, res) => {
     });
   }
 
-  Models.Members.create({
+  member.create({
     name, password
   });
 });

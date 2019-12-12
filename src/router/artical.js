@@ -1,6 +1,6 @@
 const express = require('express');
 const dayjs = require('dayjs');
-const Models = require('../../models');
+const Models = require('../../db/models');
 
 const router = express.Router();
 router.post('/add-artical', async (req, res, next) => {
@@ -19,24 +19,29 @@ router.post('/add-artical', async (req, res, next) => {
 router.get('/getArticalById', async (req, res, next) => {
   var { id } = req.query;
 
-  let articalItem = await Models.articals.findAll({
+  let articalItem = await Models.articals.findOne({
     where: {id}
   });
   
 
   res.status(200).json({
     succeed: true,
-    data: articalItem[0]
+    data: articalItem
   });
 });
 
 router.get('/list', async (req, res, next) => {
-  let articalList = await Models.articals.findAll();
+  try {
+    let articalList = await Models.articals.findAndCountAll();
 
-  res.status(200).json({
-    succeed: true,
-    list: articalList
-  });
+    res.status(200).json({
+      succeed: true,
+      list: articalList
+    });
+  } catch (err) {
+    next(err);
+  }
+
 });
 
 
