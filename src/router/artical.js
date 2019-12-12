@@ -31,8 +31,16 @@ router.get('/getArticalById', async (req, res, next) => {
 });
 
 router.get('/list', async (req, res, next) => {
+  let { page, limit } = req.query;
+  limit = limit || 10;
+  page = page || 1;
+  let offset = (page - 1) * limit;
+
   try {
-    let articalList = await Models.articals.findAndCountAll();
+    let articalList = await Models.articals.findAndCountAll({
+      limit,
+      offset,
+    });
     res.status(200).json({
       succeed: true,
       count: articalList.count,
