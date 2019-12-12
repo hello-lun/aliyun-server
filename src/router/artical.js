@@ -33,7 +33,6 @@ router.get('/getArticalById', async (req, res, next) => {
 router.get('/list', async (req, res, next) => {
   try {
     let articalList = await Models.articals.findAndCountAll();
-
     res.status(200).json({
       succeed: true,
       count: articalList.count,
