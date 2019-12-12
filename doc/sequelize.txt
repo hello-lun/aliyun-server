@@ -1,0 +1,3 @@
+npx sequelize-cli model:generate --name User --attributes name:string, password:string, phone:string
+
+npx sequelize-cli db:migrate --env=development
