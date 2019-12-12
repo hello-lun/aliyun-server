@@ -10,7 +10,6 @@ router.post('/add-artical', async (req, res, next) => {
   let artical = await Models.articals.create({
     title, content, read, link, cover, desc, createTime
   });
-
   res.status(200).json({
     succeed: true,
     data: artical
