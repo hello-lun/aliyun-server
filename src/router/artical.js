@@ -22,6 +22,7 @@ router.get('/getArticalById', async (req, res, next) => {
   let articalItem = await Models.articals.findAll({
     where: {id}
   });
+  
 
   res.status(200).json({
     succeed: true,
@@ -31,7 +32,7 @@ router.get('/getArticalById', async (req, res, next) => {
 
 router.get('/list', async (req, res, next) => {
   let articalList = await Models.articals.findAll();
-  
+
   res.status(200).json({
     succeed: true,
     list: articalList
