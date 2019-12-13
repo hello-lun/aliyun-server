@@ -19,7 +19,6 @@ function useRouter(app) {
   });
 
   app.use('/api/user', userRouter);
-
   app.use('/api/member', memberRouter);
   app.use('/api/article', articalRouter);
   app.use('/api', uploadRouter);
