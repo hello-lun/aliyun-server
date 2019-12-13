@@ -33,6 +33,18 @@ router.post('/edit-artical', async (req, res, next) => {
   });
 });
 
+router.get('/delete-artical', async (req, res, next) => {
+  let { id } = req.query;
+  let artical = await Models.articals.destroy({
+    where: { id }
+  });
+
+  res.status(200).json({
+    succeed: true,
+    data: artical
+  });
+});
+
 router.get('/getArticalById', async (req, res, next) => {
   var { id } = req.query;
 
