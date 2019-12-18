@@ -25,8 +25,9 @@ function useRouter(app) {
 
   // 捕获404并定向到错误处理
   app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    var err = new Error('404 Not Found');
     err.status = 404;
+    res.status(400);
     next(err);
   });
 }
