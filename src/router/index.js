@@ -27,8 +27,10 @@ function useRouter(app) {
   app.use(function(req, res, next) {
     var err = new Error('404 Not Found');
     err.status = 404;
-    res.status(400);
-    next(err);
+    res.status(404).json({
+      success: false,
+      message: err,
+    });
   });
 }
 
