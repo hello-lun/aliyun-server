@@ -12,7 +12,7 @@ function useRouter(app) {
     fs.readFile(filePath,function(err,data){  
       if(err)
         console.log("对不起，您所访问的路径出错", err);
-      else{
+      else {
         res.end(data);
       }
     })
@@ -23,6 +23,12 @@ function useRouter(app) {
   app.use('/api/article', articalRouter);
   app.use('/api', uploadRouter);
 
+  // 捕获404并定向到错误处理
+  app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
 }
 
 module.exports = useRouter;

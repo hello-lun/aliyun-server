@@ -19,10 +19,10 @@ router.post('/add-artical', async (req, res, next) => {
 
 router.post('/edit-artical', async (req, res, next) => {
   let {title, content, read, link, cover, desc, id} = req.body;
-  // let createTime = dayjs(+new Date()).format('YYYY-MM-DD HH:mm');
+  let createTime = dayjs(+new Date()).format('YYYY-MM-DD HH:mm');
 
   let artical = await Models.articals.update({
-    title, content, read, link, cover, desc
+    title, content, read, link, cover, desc, createTime
   },{
     where: { id }
   });
