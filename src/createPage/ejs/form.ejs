@@ -1,0 +1,8 @@
+
+<el-form :inline="true">
+    <% for(var i = 0; i < data.length; i++){ %>
+        <el-form-item label="<%= data[i].title %>">
+            <el-input v-model="formData.<%= data[i].key %>"></el-input>
+        </el-form-item>
+    <% } %>
+</el-form>
