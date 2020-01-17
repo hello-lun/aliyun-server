@@ -1,8 +1,9 @@
 
-<el-form :inline="true">
+<el-form :inline="true"> -%>
     <% for(var i = 0; i < data.length; i++){ %>
         <el-form-item label="<%= data[i].title %>">
-            <el-input v-model="formData.<%= data[i].key %>"></el-input>
+            <% var pathName = data[i].type + '.ejs'; %>
+            <%- include(pathName, {option: data[i]}); %>
         </el-form-item>
-    <% } %>
+    <% } -%>
 </el-form>

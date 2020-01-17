@@ -1,20 +1,34 @@
 <template>
-        <div>
-            <%- include('./form.ejs', {data: data}); %>
-        </div>
-    </template>
-    
-    <script>
-    export default {
-        name: '',
-        data() {
-            return {}
-        },
-        methods: {},
-        created() {},
-        mounted() {}
+    <div class="app"> -%>
+        <% if(Object.keys(config.searchBar).length > 0){ %>
+            <%- include("form.ejs", {data: config.searchBar.data}); %>
+        <% } %>
+    </div>
+</template>
+
+<script>
+export default {
+    name: '',
+    data() {
+        return {
+            formData: {
+                <% config.searchBar.data.forEach(ele => { %>
+                <%= ele.key %>: '',
+                <% }); %>
+            }
+        }
+    },
+    methods: {},
+    created() {},
+    mounted() {}
+}
+</script>
+
+<style lang="scss" scoped>
+    .app {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
     }
-    </script>
-    
-    <style lang="scss" scoped>
-    </style>
+</style>

@@ -2,29 +2,24 @@ const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
 
-fs.readFile(path.resolve(__dirname, './ejs/wrap.ejs'), (err, str) => {
-    if(err) {
-        return;
-    }
+let config = require('./pageConfig/test');
 
-    let config = {
-        data :[{
-                title: '用户名',
-                key: 'name'
-            }, {
-                title: 'appid',
-                key: 'appid'
-            }, {
-                title: '年龄',
-                key: 'age'
-            }, {
-                title: '业务名称',
-                key: 'busseness'
-            }]
-        };
+console.log(config, 999);
+let resolvePath = (p) => {
+    return path.resolve(__dirname, p);
+}
 
-    ejs.render(str.toString(), config, {async: true}).then(html => {
-        fs.writeFile(path.resolve(__dirname, './page/input.vue'), html, function(err, data) {
-        });
+fs.readFile(resolvePath('./ejs/wrap.ejs'), (err, str) => {
+    if(err) return;
+
+    let vueHtml = ejs.render(str.toString(), config, {
+        filename: resolvePath('./ejs/wrap.ejs')
     });
+
+    console.log(resolvePath('../../../aliyun-admin/src/autoCreatePage'));
+    
+    fs.writeFile(resolvePath('../../../aliyun-admin/src/autoCreatePage/input.vue'), vueHtml, function(err, data) {
+    });
+
+    // console.log(vueHtml);
 });
